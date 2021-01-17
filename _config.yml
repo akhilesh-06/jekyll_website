@@ -1,0 +1,4 @@
+title: Pdf Converter
+sass:
+  sass_dir: css
+  style: compressed
