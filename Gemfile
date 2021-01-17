@@ -1,2 +1,2 @@
 source "https://rubygems.org"
-gem "Jekyll"
+gem 'Jekyll x64-mingw32'
