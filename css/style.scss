@@ -5,11 +5,13 @@
 @import "bootstrap/bootstrap";
 
 .jumbotron{
-  background-color: #faa307;
-  border-width: thin;
+  background-color: #d6c806;
+  outline: 2px dashed gray;
+  outline-offset: -10px;
   padding-top: 50px;
   padding-bottom: 50px;
-  border: 5px solid yellow;
+  border: 10px solid #f2b90f;
+
 }
 #display{
   text-align: center;
@@ -30,5 +32,27 @@
   text-align: center;
 }
 #Jumbotron-p-3{
+  text-align: center;
+}
+footer {
+ font-size: 1.5em;
+ text-align: center;
+ padding-top: 50px;
+ color: #ccc;
+ clear: both;
+}
+
+.social-icon {
+ width: 25px;
+ height: 25px;
+ margin: 20px;
+}
+#img-to-pdf{
+border: 2px dashed black;
+}
+#privacy-and-terms{
+  text-align: center;
+}
+#contact-us{
   text-align: center;
 }
