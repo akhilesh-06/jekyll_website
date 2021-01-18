@@ -4,7 +4,7 @@
 
 @import "bootstrap/bootstrap";
 
-body{
+#bodycontainer{
   background-color: #DCE1E3;
 }
 
@@ -17,7 +17,6 @@ body{
   border: 10px solid #f2b90f;
 
 }
-
 #display{
   text-align: center;
 }
@@ -39,11 +38,11 @@ body{
 #Jumbotron-p-3{
   text-align: center;
 }
-footer {
+footer{
+  background-color: #DCE1E3;
  font-size: 1.5em;
  text-align: center;
  padding-top: 50px;
- color: #ccc;
  clear: both;
 }
 
@@ -61,9 +60,9 @@ border: 2px dashed black;
 #contact-us{
   text-align: center;
 }
-#lower-footer{
+.container-fluid{
   background-color: lightblue;
   padding-top: 10px;
   padding-bottom: 10px;
-  margin-left: 0px;
+
 }
