@@ -4,6 +4,10 @@
 
 @import "bootstrap/bootstrap";
 
+body{
+  background-color: #DCE1E3;
+}
+
 .jumbotron{
   background-color: #d6c806;
   outline: 2px dashed gray;
@@ -13,6 +17,7 @@
   border: 10px solid #f2b90f;
 
 }
+
 #display{
   text-align: center;
 }
@@ -55,4 +60,10 @@ border: 2px dashed black;
 }
 #contact-us{
   text-align: center;
+}
+#lower-footer{
+  background-color: lightblue;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 0px;
 }
