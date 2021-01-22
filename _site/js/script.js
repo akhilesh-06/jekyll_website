@@ -1,57 +1,74 @@
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <script src="https://unpkg.com/pdf-lib@1.7.0"></script>
-    <script src="https://unpkg.com/downloadjs@1.4.7"></script>
-  </head>
-
-  <body>
-    <p>Click the button to create a document and attach a JPEG image and PDF file with <code>pdf-lib</code></p>
-    <button onclick="addAttachments()">Create PDF</button>
-    <p class="small">(Your browser will download the resulting file)</p>
-  </body>
-
-  <script>
-    const { PDFDocument, rgb } = PDFLib
-
-    async function addAttachments() {
-			// Define attachment URLs
-      const jpgUrl = 'https://pdf-lib.js.org/assets/cat_riding_unicorn.jpg'
-      const pdfUrl = 'https://pdf-lib.js.org/assets/us_constitution.pdf';
-
-			// Fetch attachments
-      const jpgAttachmentBytes = await fetch(jpgUrl).then(res => res.arrayBuffer())
-      const pdfAttachmentBytes = await fetch(pdfUrl).then(res => res.arrayBuffer())
-
-
-      // Create a new PDFDocument
-      const pdfDoc = await PDFDocument.create()
-
-      // Add the JPG attachment
-      await pdfDoc.attach(jpgAttachmentBytes, 'cat_riding_unicorn.jpg', {
-        mimeType: 'image/jpeg',
-        description: 'Cool cat riding a unicorn! 🦄🐈🕶️',
-        creationDate: new Date('2019/12/01'),
-        modificationDate: new Date('2020/04/19'),
-      })
-
-      // Add the PDF attachment
-      await pdfDoc.attach(pdfAttachmentBytes, 'us_constitution.pdf', {
-        mimeType: 'application/pdf',
-        description: 'Constitution of the United States 🇺🇸🦅',
-        creationDate: new Date('1787/09/17'),
-        modificationDate: new Date('1992/05/07'),
-      })
-
-      // Add a page with some text
-      const page = pdfDoc.addPage();
-      page.drawText('This PDF has two attachments', { x: 135, y: 415 })
-
-      // Serialize the PDFDocument to bytes (a Uint8Array)
-      const pdfBytes = await pdfDoc.save()
-
-			// Trigger the browser to download the PDF document
-      download(pdfBytes, "pdf-lib_add_attachments.pdf", "application/pdf");
+const {
+    PDFDocument
+} = PDFLib
+let jpgfileByteArray = [];
+let pngfileByteArray = [];
+async function embedImages() {
+    const pdfDoc = await PDFDocument.create();
+    for (let x = 0; x < jpgfileByteArray.length; x++) {
+       var page = pdfDoc.addPage();
+        var jpgImageBytes = jpgfileByteArray[x];
+        var jpgImage = await pdfDoc.embedJpg(jpgImageBytes);
+        var jpgDims = jpgImage.scale(0.50);
+        page.drawImage(jpgImage, {
+            x: page.getWidth() / 2 - jpgDims.width / 2,
+            y: page.getHeight() / 2 - jpgDims.height / 2 + 250,
+            width: jpgDims.width,
+            height: jpgDims.height,
+        });
     }
-  </script>
-</html>
+    for (let x = 0; x < pngfileByteArray.length; x++) {
+        var page = pdfDoc.addPage();
+        var pngImageBytes = pngfileByteArray[x];
+        var pngImage = await pdfDoc.embedPng(pngImageBytes)
+        var pngDims = pngImage.scale(0.50);
+        page.drawImage(pngImage, {
+            x: page.getWidth() / 2 - pngDims.width / 2,
+            y: page.getHeight() / 2 - pngDims.height / 2 + 250,
+            width: pngDims.width,
+            height: pngDims.height,
+        })
+    }
+    const pdfBytes = await pdfDoc.save()
+    download(pdfBytes, "ImageToPdfConverter.pdf", "application/pdf");
+}
+const fileSelect = document.getElementById("fileSelect"),
+    fileElem = document.getElementById("fileElem"),
+    fileList = document.getElementById("fileList");
+
+fileSelect.addEventListener("click", function(e) {
+    if (fileElem) {
+        fileElem.click();
+    }
+    e.preventDefault(); // prevent navigation to "#"
+}, false);
+fileElem.addEventListener("change", handleFiles, false);
+
+
+function handleFiles() {
+    if (!this.files.length) {
+        fileList.innerHTML = "<p>No files selected!</p>";
+    } else {
+        fileList.innerHTML = "";
+        const list = document.createElement("ul");
+        fileList.appendChild(list);
+        for (let i = 0; i < this.files.length; i++) {
+        //debugger;
+            const file = this.files[i];
+            let reader = new FileReader();
+            reader.onload = function(e) {
+                let arrayBuffer = new Uint8Array(reader.result);
+                console.log(file.type);
+                if (file.type == "image/png") {
+                    pngfileByteArray.push(arrayBuffer);
+                } else if (file.type == "image/jpg"||file.type == "image/jpeg") {
+                    jpgfileByteArray.push(arrayBuffer);
+                } else {
+                    alert("Please select only JPG or PNG file");
+                }
+            }
+
+            reader.readAsArrayBuffer(file);
+        }
+    }
+}

@@ -5,17 +5,17 @@
 @import "bootstrap/bootstrap";
 
 #bodycontainer{
-  background-color: #DCE1E3;
+  background-color: white;
 }
-
 .jumbotron{
-  background-color: #d6c806;
+  background-color: #cde5d7;
   outline: 2px dashed gray;
   outline-offset: -10px;
   padding-top: 50px;
   padding-bottom: 50px;
-  border: 10px solid #f2b90f;
-
+  border: 10px solid #edf2fb;
+  border-radius: 10px;
+  outline-offset: -10px;
 }
 #display{
   text-align: center;
@@ -32,6 +32,16 @@
 #drop-file{
   margin-left: 50%;
 }
+#row-1{
+  background-color: #edf2fb;
+  padding:15px;
+  border-radius: 10px;
+}
+#row-2{
+  background-color: #edf2fb;
+  padding: 15px;
+  border-radius: 10px;
+}
 #lead{
   text-align: center;
 }
@@ -39,13 +49,17 @@
   text-align: center;
 }
 footer{
-  background-color: #DCE1E3;
+  background-color: #edf2fb;;
  font-size: 1.5em;
  text-align: center;
  padding-top: 50px;
- clear: both;
+ border-radius: 10px;
 }
-
+#footer-row-1{
+  background-color: #edf2fb;
+  padding: 15px;
+  border-radius: 10px;
+}
 .social-icon {
  width: 25px;
  height: 25px;
@@ -60,9 +74,22 @@ border: 2px dashed black;
 #contact-us{
   text-align: center;
 }
-.container-fluid{
-  background-color: lightblue;
-  padding-top: 10px;
-  padding-bottom: 10px;
+#fileSelect{
+  border: 3px solid blue;
+  background-color: white;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 
+  text-decoration: none;
+  color: black;
+  border-radius: 10px;
+}
+#Create-pdf{
+  border: 2px solid blue;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: white;
 }
