@@ -1,9 +1,9 @@
 # jekyll_website
 website to convert image into pdf 
 
-Installing Ruby with jekyll to host a image to pdf converter "static" site 
+Installing Ruby with jekyll to host a image to pdf converter "static" site.
 
-Just a small project with HTML,CSS and some bootstrap
+Just a small project with HTML,CSS,Bootstrap and and some Javascript.
 
 Have a look at my website:
 
